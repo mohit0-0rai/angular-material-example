@@ -1,0 +1,44 @@
+.parent {
+  margin-top: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.error-card {
+  background-color: #ffe3e6;
+  margin-bottom: 20px;
+}
+
+.login-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login-card {
+  width: 300px;
+}
+
+.card {
+  width: 100%;
+}
+
+.login-card-header {
+  justify-content:center;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.login-button {
+  justify-content: center;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  outline: none;
+}

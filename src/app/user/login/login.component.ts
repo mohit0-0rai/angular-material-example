@@ -33,9 +33,13 @@ export class LoginComponent implements OnInit {
     this.login.password = this.loginForm.get('password').value;
 
     if (this.loginForm.valid) {
-      this.authService.login(this.login).subscribe(data => {
+      this.authService.login(this.login).subscribe((data) => {
         if (this.authService.isLoggedIn) {
-          this.router.navigate([this.authService.redirectUrl]);
+          if (this.authService.redirectUrl === '') {
+            this.router.navigate(['dashboard']);
+          } else {
+            this.router.navigate([this.authService.redirectUrl]);
+          }
         } else {
           this.errorMessage = 'Invalid Credentials';
         }

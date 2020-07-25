@@ -2,10 +2,9 @@
   <div class="login-card"
         (mouseover)="hover=true"
         (mouseout)="hover=false">
-  <mat-card class="card error-card" *ngIf="true"
+  <mat-card class="card error-card" *ngIf="errorMessage != null"
             [class.mat-elevation-z5]="hover == true">
-    <span style="text-align: left; color: black;">Testing</span>
-    <span style="justify: right; color: black">X</span>
+    <span style="color: black;">{{ errorMessage }}</span>
   </mat-card>
   <mat-card class="card"
             [class.mat-elevation-z5]="hover == true">
@@ -36,12 +35,12 @@
           <!--<button mat-flat-button color="accent" class="login-button" type="submit" [disabled]="loginForm.invalid">Login</button> -->
 
       </form>
-      <span>Form Invalid:{{ loginForm.invalid }}, </span>
-      <span>Form Touched:{{ loginForm.touched }}, </span>
-      <span>Email Valid:{{ loginForm.get('email').valid }}, </span>
-      <span>Password Valid:{{ loginForm.get('password').valid }}, </span>
-      <span>Form Value:{{ loginForm.value | json }}, </span>
-      <span>Errors Value:{{ loginForm.get('email').errors | json }}</span>
+      <span>Form-Invalid:{{ loginForm.invalid }}, </span>
+      <span>Form-Touched:{{ loginForm.touched }}, </span>
+      <span>Email-Valid:{{ loginForm.get('email').valid }}, </span>
+      <span>Password-Valid:{{ loginForm.get('password').valid }}, </span>
+      <span>Form-Value:{{ loginForm.value | json }}, </span>
+      <span>Errors-Value:{{ loginForm.get('email').errors | json }}</span>
     </mat-card-content>
   </mat-card>
   </div>

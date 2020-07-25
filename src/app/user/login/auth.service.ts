@@ -11,20 +11,23 @@ import { tap } from 'rxjs/operators';
 })
 export class AuthService {
   isLoggedIn: boolean;
-  redirectUrl: string;
+  redirectUrl = 'home';
 
   constructor(private router: Router, private http: HttpClient) {
   }
 
-  login(login: Login): Observable<ResponseData> {
-    const url = `http://localhost:8080/materialdemo/login`;
-    return this.http.post<ResponseData>(url, login).pipe(
-      tap(data => {
-        console.log(data.code);
-        if (data.code === '200') {
-          this.isLoggedIn = true;
-        } else { this.isLoggedIn = false; }
-      })
+  login(login: Login): Observable<boolean> {
+    //const url = `http://localhost:8080/materialdemo/login`;
+    //return this.http.post<ResponseData>(url, login).pipe(
+    //  tap(data => {
+    //    console.log(data.code);
+    //    if (data.code === '200') {
+    //      this.isLoggedIn = true;
+    //    } else { this.isLoggedIn = false; }
+    //  })
+    //);
+    return of(true).pipe(
+      tap(val => this.isLoggedIn = true)
     );
   }
 

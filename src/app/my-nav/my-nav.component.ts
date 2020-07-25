@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { MatSidenav } from '@angular/material';
 import { DOCUMENT } from '@angular/common';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material';
 import { AuthService } from '../user/login/auth.service';
+import { ThemeService } from './../shared/theme.service';
 
 @Component({
   selector: 'app-my-nav',
@@ -18,12 +18,10 @@ export class MyNavComponent implements OnInit {
     'Home',
     'Dashboard'
   ];
-  public isDarkTheme: boolean;
 
-  constructor(private breakpointObserver: BreakpointObserver, @Inject(DOCUMENT) document, public authService: AuthService) {}
+  constructor(@Inject(DOCUMENT) document, public authService: AuthService, public themeService: ThemeService) {}
 
   ngOnInit(): void {
-    this.isDarkTheme = false;
   }
 
   toggleMenu(): void {
@@ -32,14 +30,7 @@ export class MyNavComponent implements OnInit {
   }
 
   onToggleChange(): void {
-    this.isDarkTheme = !this.isDarkTheme;
-    if (this.isDarkTheme) {
-      document.getElementById('themeTag').classList.remove('light-theme');
-      document.getElementById('themeTag').classList.add('dark-theme');
-    } else {
-      document.getElementById('themeTag').classList.remove('dark-theme');
-      document.getElementById('themeTag').classList.add('theme-theme');
-    }
+    this.themeService.isDarkTheme = !this.themeService.isDarkTheme;
   }
 
 }

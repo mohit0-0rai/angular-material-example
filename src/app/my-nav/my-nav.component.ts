@@ -13,7 +13,6 @@ export class MyNavComponent implements OnInit {
 
   public isMenuOpen = true;
   @ViewChild('drawer') drawer: MatSidenav;
-  @ViewChild('themeTag') themeTag: ElementRef;
   public navContents = [
     'Home',
     'Dashboard'

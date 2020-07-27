@@ -21,7 +21,7 @@
             <mat-icon matSuffix *ngIf="loginForm.get('email').touched && loginForm.get('email').invalid" style="color: red;">error_outline</mat-icon>
           </mat-form-field>
 
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" class="form-field-margin">
             <mat-label>Password</mat-label>
             <input matInput type="password" formControlName="password" required>
             <mat-hint>minimum 8 characters</mat-hint>
@@ -32,7 +32,6 @@
           <br/>
           <br/>
           <button mat-flat-button color="primary" class="login-button" type="submit" [disabled]="loginForm.invalid">Login</button>
-          <!--<button mat-flat-button color="accent" class="login-button" type="submit" [disabled]="loginForm.invalid">Login</button> -->
 
       </form>
       <span>Form-Invalid:{{ loginForm.invalid }}, </span>

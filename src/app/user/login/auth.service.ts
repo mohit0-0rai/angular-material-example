@@ -1,38 +1,47 @@
-import { Observable, of } from 'rxjs';
+import { User } from './../../shared/user';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Login } from './login';
-import { ResponseData } from 'src/app/shared/ResponseData';
 import { tap } from 'rxjs/operators';
+import { ResponseData } from 'src/app/shared/ResponseData';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   isLoggedIn: boolean;
-  redirectUrl = 'home';
+  currentUser: BehaviorSubject<User>;
+  redirectUrl: string;
 
   constructor(private router: Router, private http: HttpClient) {
+    this.currentUser = new BehaviorSubject<User>(JSON.parse(sessionStorage.getItem('currentuser')));
+    this.isLoggedIn = JSON.parse(sessionStorage.getItem('isLoggedIn'));
   }
 
-  login(login: Login): Observable<boolean> {
-    //const url = `http://localhost:8080/materialdemo/login`;
-    //return this.http.post<ResponseData>(url, login).pipe(
-    //  tap(data => {
-    //    console.log(data.code);
-    //    if (data.code === '200') {
-    //      this.isLoggedIn = true;
-    //    } else { this.isLoggedIn = false; }
-    //  })
-    //);
-    return of(true).pipe(
-      tap(val => this.isLoggedIn = true)
+  get getCurrentUser(): User {
+    return this.currentUser.value;
+  }
+
+  login(login: Login): Observable<ResponseData> {
+    const url = `http://localhost:8080/materialdemo/login`;
+    return this.http.post<ResponseData>(url, login).pipe(
+      tap(data => {
+        console.log(data.code);
+        if (data.code === '200') {
+          this.isLoggedIn = true;
+          console.log(JSON.stringify(data.data));
+        } else { this.isLoggedIn = false; }
+      })
     );
   }
 
   logout(): void {
+    sessionStorage.removeItem('currentUser');
+    sessionStorage.removeItem('isLoggedIn');
     this.isLoggedIn = false;
+    this.currentUser.next(null);
     this.router.navigate(['/home']);
   }
 

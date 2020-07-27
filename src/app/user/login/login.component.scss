@@ -40,6 +40,6 @@ mat-form-field {
   justify-content: center;
 }
 
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-thick {
-  outline: none;
+.form-field-margin {
+  margin-bottom: 10px;
 }
